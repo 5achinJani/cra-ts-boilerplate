@@ -1,0 +1,20 @@
+# aws codebuild for React and deployment to S3
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - yarn
+  build:
+    commands:
+      - echo Build started on `date`
+      - yarn build
+      - cd build
+      - aws s3 sync . s3://${S3_BUCKET} --exclude "index.html" --exclude "*.DS_Store*" --exclude "service-worker.js" --cache-control max-age=86400 --delete
+      - aws s3 cp index.html s3://${S3_BUCKET}/index.html --cache-control max-age=0,no-cache,no-store,must-revalidate
+      - aws s3 cp service-worker.js s3://${S3_BUCKET}/service-worker.js --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type application/javascript
+      # invalidate the CloudFront cache for index.html and service-worker.js to force CloudFront to update its edge locations with the new versions
+      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_ID} --paths /index.html /service-worker.js

@@ -9,3 +9,8 @@ export type IUser = {
    */
   key_that_needs_update: string;
 };
+
+export type IAuth = {
+  token: string;
+  expires: string;
+};

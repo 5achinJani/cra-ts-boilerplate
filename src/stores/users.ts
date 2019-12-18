@@ -58,7 +58,8 @@ export class UsersStore {
     }
   };
 
-  onUserSelect = ({ user_id }: { user_id: number }) => {
+  onUserSelect = (params: { user_id: number }) => {
+    const { user_id } = params;
     history.push(routes_config.user_details.path_string({ user_id }));
   };
 

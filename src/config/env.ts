@@ -1,10 +1,5 @@
 const env = process.env;
-const {
-  NODE_ENV,
-  REACT_APP_DEV_URL,
-  REACT_APP_GOOGLE_MAP_KEY,
-  REACT_APP_SENTRY_DSN
-} = env;
+const { NODE_ENV, REACT_APP_DEV_URL, REACT_APP_SENTRY_DSN } = env;
 
 /**
  * @description We'll use this object to iterate on it and check
@@ -13,14 +8,12 @@ const {
  */
 const env_required: { [key: string]: string } = {
   REACT_APP_DEV_URL,
-  REACT_APP_GOOGLE_MAP_KEY,
   REACT_APP_SENTRY_DSN
 };
 
 export const isDevelopment = NODE_ENV === 'development';
 // export const API_URL = isDevelopment ? REACT_APP_DEV_URL : REACT_APP_PROD_URL;
 export const API_URL = REACT_APP_DEV_URL;
-export const GOOGLE_MAP_KEY = REACT_APP_GOOGLE_MAP_KEY;
 export const SENTRY_DSN = REACT_APP_SENTRY_DSN;
 
 const checkEnv = () => {

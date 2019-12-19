@@ -11,6 +11,6 @@ export type IUser = {
 };
 
 export type IAuth = {
-  token: string;
-  expires: string;
+  token: string | null;
+  expires: string | null;
 };

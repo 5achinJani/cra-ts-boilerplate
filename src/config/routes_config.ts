@@ -38,15 +38,15 @@ export const routes: IRoutesConfig = {
     component: undefined
   },
   users: {
-    id: 'index',
+    id: 'users',
     name: 'Users',
     description: 'Users listing page',
-    path: '/',
+    path: '/users',
     path_string: () => {
-      return `/`;
+      return `/users`;
     },
     exact: true,
-    isPrivate: false,
+    isPrivate: true,
     component: undefined
   },
   user_details: {
@@ -57,17 +57,6 @@ export const routes: IRoutesConfig = {
     path_string: (params: { user_id: number }) => {
       const { user_id } = params;
       return `/users/${user_id}`;
-    },
-    exact: true,
-    isPrivate: false,
-    component: undefined
-  },
-  private_route_example: {
-    id: 'private_route_example',
-    name: 'incognito',
-    path: '/private',
-    path_string: () => {
-      return `/private`;
     },
     exact: true,
     isPrivate: true,
@@ -82,6 +71,7 @@ export const routes: IRoutesConfig = {
     },
     exact: true,
     isPrivate: false,
+    isStatic: true,
     component: undefined
   }
 };

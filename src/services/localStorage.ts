@@ -6,7 +6,7 @@
  *  in sync with localStorage with the help of this
  *  architecture
  */
-import { IUser } from 'types';
+import { IUser, IAuth } from 'types';
 
 const key = 'cra-boilerplate';
 
@@ -26,7 +26,7 @@ export const loadState = () => {
  * @todo import types of from types/ and assign here
  */
 type IState = {
-  auth: object;
+  auth: IAuth;
   user: IUser;
 };
 
@@ -57,6 +57,14 @@ export const set = ({ key, value }: { key: string; value: object }) => {
   };
   saveState(updatedState);
   return updatedState[key];
+};
+
+export const getAuth = (): IAuth => {
+  return get({ key: lcStateDef.auth });
+};
+
+export const setAuth = ({ value }: { value: IAuth }): IAuth => {
+  return set({ key: lcStateDef.auth, value });
 };
 
 export const getUser = (): IUser => {
